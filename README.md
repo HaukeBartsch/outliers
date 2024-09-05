@@ -15,4 +15,4 @@ Approach 1: Based on the product of the machine precision and the largest singul
 
 Approach 2: Better to use a Tikhonov regularization. Before computing the inverse of S change them to $\frac{\sigma_i}{\sigma_i^2 + \alpha^2}$. Given some $\alpha$ (0.001?) this will slowly penalize values that are small.
 
-![distance as color background with point-cloud](https://github.com/HaukeBartsch/outlier/raw/main/images/distance_overlay.png)
+![distance as color background with point-cloud](https://github.com/HaukeBartsch/outliers/blob/main/images/distance_overlay.png)
