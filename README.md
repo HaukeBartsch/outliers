@@ -4,7 +4,7 @@ How far is a point away from a given set of points? If its far away it could be 
 
 Assumption here is that we are talking about multivariate normal distributions.
 
-[!NOTE]
+> [!NOTE]
 > The example creates a point cloud that is already centered. Don't forget to check in a real dataset that cov centers the data.
 
 ### Regularization
