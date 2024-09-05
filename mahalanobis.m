@@ -25,8 +25,10 @@ np = [0,10];
 #
 [U, S, V] = svd(C);
 # Now C equals U*S*V'
-# Replace the sigular values with their inverses. Attention, use Tikhonov regularization here!
-Sn = diag(1./diag(S))
+# Replace the sigular values with their inverses, using Tikhonov regularization
+# Instead of Sn = diag(1./diag(S)) use regularization:
+Sn = diag( diag(S) ./ (diag(S).^2 + 0.001^2) )
+
 Ct = U*Sn*V';
 # Ct represents the 'space-distortion' of our distribution of points.
 # Compute the Mahalanobis distance mdist of np to C using a quadratic form.
@@ -43,7 +45,7 @@ scatter (xt, yt);
 C = cov(xt, yt);
 # The Mahalanobis computation again:
 [U, S, V] = svd(C);
-Sn = diag(1./diag(S))
+Sn = diag( (diag(S) ./ (diag(S).^2 + 0.001^2)) );
 Ct = U*Sn*V';
 
 # And compute one scalar distance to point [5,2] (close to the distribution)
@@ -53,3 +55,15 @@ d = np * Ct * np'
 np = [-5,2];
 d = np * Ct * np'
 
+# Distance map to verify what we are doing.
+[mx,my] = meshgrid(-10:1:10, -10:1:10);
+m = zeros(size(mx,1),size(mx,2))
+for i=1:size(mx,1)
+    for j=1:size(mx,2)
+        np = [mx(i,j); my(i,j)]';
+        m(i,j) = np * Ct * np';
+    end
+end
+pcolor (mx, my, m); colorbar; colormap(gray);
+hold on;
+scatter (xt, yt);
