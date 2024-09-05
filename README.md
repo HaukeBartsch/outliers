@@ -13,6 +13,6 @@ To be practically useful we need to add a way to cope with singular values that 
 
 Approach 1: Based on the product of the machine precision and the largest singular value set every singular value to 0 that is below that product. This is kind of crude as quite suddenly singular values appear as 0 in the sequence of largest to smallest singular value.
 
-Approach 2: Better to use a Tikhonov regularization. Before computing the inverse of S change them to $\frac{\sigma_i}{\sigma_i^2 + \alpha^2}$. Given some $\alpha$ (0.001?) this will slowly penalize values that are small.
+Approach 2: Better to use a Tikhonov regularization. To compute the inverse of S we use diagonal elements in S that are $\frac{\sigma_i}{\sigma_i^2 + \alpha^2}$ where $\sigma$ are the singular values. Given some $\alpha$ (0.001?) this will slowly penalize values that are small.
 
 ![distance as color background with point-cloud](https://github.com/HaukeBartsch/outliers/blob/main/images/distance_overlay.png)
