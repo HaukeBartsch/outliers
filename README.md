@@ -1,4 +1,4 @@
-# Example for Mahalanobis distance computation
+# Mahalanobis distance computation
 
 How far away (different) is a point from a given set of points? If it is far away it could be an interesting point to look at.
 
@@ -24,7 +24,7 @@ Fig.1: Point-cloud (red circles) from an elongated distribution with Mahalanobis
 
 ## Observations
 
-The example in the code is two dimensional. But the approach natually extends to N>2 dimensions.
+The example in the code is two dimensional. But the approach naturally extends to N>2 dimensions.
 
 Not all data is numerical. There are also categorical/factor level variables (e.g. is-female) and ordinal valued data (e.g. Likert-scales).
 
@@ -32,16 +32,20 @@ Many datasets are far away from being normal (or Gaussian, or defined by first a
 
 The Mahalanobis distance ignores any higher order moments (>2), it relies on second-order correlations only. What about statistical independence?
 
-### How to use, related ideas
+What about a large number of dimension and few datapoints? Computation of a variance-covariance matrix requires at least 2 data points with values in all dimensions. What if there are missing values? Most variance/covariance matrix computations will remove the whole datapoint if even one of the dimension is unknown. Remove the dimension or have a look at imputation.
+
+### How to use and related ideas
 
 1) One idea is to rank data points. Sort datapoints using their Mahalanobis distance from largest to smallest. The hope is that points that appear early in this list are 'different' from most other points. Basically this works if the distribution is normal with most points close to 0.
 
 > [!NOTE]
 > Notice that de-correlation does not rotate our distribution? The eigenvectors will point into some usfull directions but because we just want to compute a scalar distance we ignore that information if we compute Mahalanobis.
 
-2) Another idea is to use the Mahalanobis distance as a sensitive novelty detector. If we assume a stable distribution and successively look at new points the rate at which we get large Mahalanobis distances should be stable. If we receive larger values this might indicate that our stability assumption is no longer valid, something changed the distribution.
+2) Another idea is to use the Mahalanobis distance as a sensitive novelty detector (turbulence index). If we assume a stable distribution and successively look at new points the rate at which we get large Mahalanobis distances should be stable. If we receive larger values this might indicate that our stability assumption is no longer valid, something changed the distribution.
 
 3) We can also generate new data that has the same first and second order moments. This is not really related to the distance computation because we just need to draw a new point from the normal distribution and transform it using SVD of the target 
 distributions co-variance matrix.
 
 4) Removing first and second order information from data is called de-correlation or 'whitening'. This technique can be used to normalize data as only higher order information remains after this process. If large differences in variances between dimensions are an issue this can set all variances to 1.
+
+5) In statistics (e.g. linear regression) the Mahalanobis distance of a point defines its 'leverage', its ability to change the slope of the regression line. You can make a regression line more resistent to outliers if you use the leverage values to weight points. Large leverage should have a lower influence on slope etc.
