@@ -24,13 +24,13 @@ Fig.1: Point-cloud (red circles) from an elongated distribution with Mahalanobis
 
 ## Observations
 
-The example in the code is two dimensional but the approach natually extends to N>2 dimensions.
+The example in the code is two dimensional. But the approach natually extends to N>2 dimensions.
 
-Numeric valued data are only one category. There are also categorical/factor level variables (is-female) and ordinal value (Likert-scale).
+Not all data is numerical. There are also categorical/factor level variables (e.g. is-female) and ordinal valued data (e.g. Likert-scales).
 
-Many datasets are far away from being normal (Gaussian, defined by first and second order moments only), they can be skewed or have unusual kurtosis (peakedness or heavy tails). Maybe we can use a transformation of those dimensions first?
+Many datasets are far away from being normal (or Gaussian, or defined by first and second order moments only). Data can be skewed or have unusual kurtosis (peakedness or heavy tails). Transform those first?
 
-The Mahalanobis distance ignores any higher order moments (>2), it relies on correlations only. What about statistical independence? 
+The Mahalanobis distance ignores any higher order moments (>2), it relies on second-order correlations only. What about statistical independence?
 
 ### How to use, related ideas
 
