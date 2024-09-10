@@ -20,6 +20,8 @@ Approach 2: Better to use a Tikhonov regularization. To compute the inverse of S
 
 
 ![distance as color background with point-cloud](https://github.com/HaukeBartsch/outliers/blob/main/images/distance_overlay.png)
+Fig.1: Point-cloud (red circles) from an elongated distribution with Mahalanobis distance as underlay computed at a regular grid.
+
 
 ## Observations
 
