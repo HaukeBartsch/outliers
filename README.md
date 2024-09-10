@@ -2,16 +2,15 @@
 
 How far away (different) is a point from a given set of points? If it is far away it could be an interesting point to look at.
 
-Assumption here is that we are talking about multi-variate normal distributions.
+The provided Octave/Matlab script [mahalanobis.m](https://github.com/HaukeBartsch/outliers/blob/main/mahalanobis.m) demonstrates the process of computing the Mahalanobis distance in 2d.
 
-> [!NOTE]
-> The example creates a point cloud that is already centered. Don't forget to check in a real dataset that cov centers the data.
+Assumption here is that we are talking about multi-variate normal distributions.
 
 ### Regularization
 
-To be practically useful we need to cope with singular values that are close to 0.
+To be practically useful we need a way to cope with singular values that are close to 0. Inverting such values can otherwise introduce a large dependency of the results on noise (division by small values).
 
-Approach 1: Based on the product of the machine precision and the largest singular value set every singular value to 0 that is below that product. This is kind of crude as quite suddenly singular values appear as 0 in the sequence of largest to smallest singular value.
+Approach 1: Based on the product of the machine precision and the largest singular value set every singular value to 0 that is below that product. This is kind of crude as quite suddenly singular values appear as 0 in the sequence of largest to smallest singular value. Noise on the other hand can be assumed to affect all singular values. Above our threshold we accept the noise and below the threshold we ignore all remaining information.
 
 Approach 2: Better to use a Tikhonov regularization. To compute the inverse of S we use diagonal elements in S that are $\frac{\sigma_i}{\sigma_i^2 + \alpha^2}$ where $\sigma$ are the singular values. Given some $\alpha$ (0.001?) this will slowly penalize values that are small.
 
