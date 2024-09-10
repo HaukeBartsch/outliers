@@ -44,7 +44,7 @@ What about a large number of dimension and few datapoints? Computation of a vari
 2) Another idea is to use the Mahalanobis distance as a sensitive novelty detector (turbulence index). If we assume a stable distribution and successively look at new points the rate at which we get large Mahalanobis distances should be stable. If we receive larger values this might indicate that our stability assumption is no longer valid, something changed the distribution.
 
 3) We can also generate new data that has the same first and second order moments. This is not really related to the distance computation because we just need to draw a new point from the normal distribution and transform it using SVD of the target 
-distributions co-variance matrix.
+distributions co-variance matrix. Notice that we use a squared distance to get positive values only. Use the square root if you care about the magnitude of the Mahalanobis distance.
 
 4) Removing first and second order information from data is called de-correlation or 'whitening'. This technique can be used to normalize data as only higher order information remains after this process. If large differences in variances between dimensions are an issue this can set all variances to 1.
 
