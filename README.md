@@ -32,14 +32,14 @@ Many datasets are far away from being normal (or Gaussian, or defined by first a
 
 The Mahalanobis distance ignores any higher order moments (>2), it relies on second-order correlations only. What about statistical independence?
 
-What about a large number of dimension and few datapoints? Computation of a variance-covariance matrix requires at least 2 data points with values in all dimensions. What if there are missing values? Most variance/covariance matrix computations will remove the whole datapoint if even one of the dimension is unknown. Remove the dimension or have a look at imputation.
+What about a large number of dimension and few data points? Computation of a variance-covariance matrix requires at least 2 data points with values in all dimensions. What if there are missing values? Most variance/covariance matrix computations will remove the whole data point if even one of the dimension is unknown. Remove the dimension or have a look at imputation.
 
 ### How to use and related ideas
 
-1) One idea is to rank data points. Sort datapoints using their Mahalanobis distance from largest to smallest. The hope is that points that appear early in this list are 'different' from most other points. Basically this works if the distribution is normal with most points close to 0. If you need to manually review data this approach can limit the amount of data you need to look at. As data becomes more similar to most of data once you see one data point that is 'ok' you can ignore the rest of the list.
+1) One idea is to rank data points. Sort data points using their Mahalanobis distance from largest to smallest. The hope is that points that appear early in this list are 'different' from most other points. Basically this works if the distribution is normal with most points close to 0. If you need to manually review data this approach can limit the amount of data you need to look at. As data becomes more similar to most of data once you see one data point that is 'ok' you can ignore the rest of the list.
 
 > [!NOTE]
-> Notice that de-correlation does not rotate our distribution? The eigenvectors will point into some usfull directions but because we just want to compute a scalar distance we ignore that information if we compute Mahalanobis.
+> Notice that de-correlation does not rotate our distribution? The eigenvectors will point into some useful directions but because we just want to compute a scalar distance we ignore that information if we compute Mahalanobis.
 
 2) Another idea is to use the Mahalanobis distance as a sensitive novelty detector (turbulence index). If we assume a stable distribution and successively look at new points the rate at which we get large Mahalanobis distances should be stable. If we receive larger values this might indicate that our stability assumption is no longer valid, something changed the distribution.
 
