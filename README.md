@@ -36,7 +36,7 @@ What about a large number of dimension and few datapoints? Computation of a vari
 
 ### How to use and related ideas
 
-1) One idea is to rank data points. Sort datapoints using their Mahalanobis distance from largest to smallest. The hope is that points that appear early in this list are 'different' from most other points. Basically this works if the distribution is normal with most points close to 0.
+1) One idea is to rank data points. Sort datapoints using their Mahalanobis distance from largest to smallest. The hope is that points that appear early in this list are 'different' from most other points. Basically this works if the distribution is normal with most points close to 0. If you need to manually review data this approach can limit the amount of data you need to look at. As data becomes more similar to most of data once you see one data point that is 'ok' you can ignore the rest of the list.
 
 > [!NOTE]
 > Notice that de-correlation does not rotate our distribution? The eigenvectors will point into some usfull directions but because we just want to compute a scalar distance we ignore that information if we compute Mahalanobis.
